@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\GridManager_v2.cs" />
     <Compile Include="Assets\Scripts\GridManager.cs" />
     <Compile Include="Assets\Scripts\CreateLevel.cs" />
+    <Compile Include="Assets\Scripts\Players.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Txt\txtPrueba.txt" />

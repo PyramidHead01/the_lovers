@@ -10,6 +10,8 @@ public class GridManager_v2 : MonoBehaviour
     public float[,] grid;
     int vertical, horizontal, columns, rows;
 
+    public GameObject player1, player2;
+
 
     [Header("Rutas")]
     public string rutaIntermedia;
@@ -86,24 +88,60 @@ public class GridManager_v2 : MonoBehaviour
 
     private void SpawnTile(int x, int y, float value)
     {
+
+        //Debug.Log(x);
+
+        if (arrayTexto[y].Substring(x, 1) == "C")
+        {
+            //Aqui instanciar player1
+            
+
+
+            GameObject newObject = Instantiate(player1, new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f)), Quaternion.identity);  // instatiate the object
+            newObject.transform.localScale = new Vector3(25, 25, this.transform.localScale.z);
+
+
+
+        }
+        else if (arrayTexto[y].Substring(x, 1) == "D")
+        {
+
+
+
+
+
+            GameObject newObject = Instantiate(player2, new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f)), Quaternion.identity);  // instatiate the object
+            newObject.transform.localScale = new Vector3(25, 25, this.transform.localScale.z);
+
+
+            //Aqui instanciar player2
+            //Instantiate(player1, new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f)), Quaternion.identity);
+        }
+
         GameObject g = new GameObject("X: " + x + " Y: " + y);
         g.transform.position = new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f));
         var s = g.AddComponent<SpriteRenderer>();
         s.sprite = sprite;
-        //Debug.Log(x);
-        if(arrayTexto[y].Substring(x, 1) == "A")
+
+        if (arrayTexto[y].Substring(x, 1) == "B")// || arrayTexto[y].Substring(x, 1) == "C" || arrayTexto[y].Substring(x, 1) == "D")
         {
-            
 
-            s.color = new Color32(199, 240, 216,255);
-            
-
+            //if (y > 24)
+                s.color = new Color32(67, 82, 61, 255);
+            /*else
+                s.color = new Color32(199, 240, 216, 255);*/
         }
+
         else
         {
-            s.color = new Color32(67, 82, 61, 255);
+            //if (y > 24)
+                s.color = new Color32(199, 240, 216, 255);
+            /*else
+                s.color = new Color32(67, 82, 61, 255);*/
         }
-        
+
+
+
     }
 
     // Update is called once per frame
