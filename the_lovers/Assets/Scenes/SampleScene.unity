@@ -215,8 +215,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 644412154}
-  - component: {fileID: 644412153}
   - component: {fileID: 644412155}
+  - component: {fileID: 644412153}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -233,10 +233,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 644412152}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b63f86935a4a8c4fb6c2f2194b6f47d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a73b39d56a86b7499e89e4e0739b805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 7582d33a0798f694b80b1479e30b95ca, type: 3}
+  rutaIntermedia: /Txt/
+  nombreArchivo: txtPrueba
+  build: 0
+  mostrarDebugLog: 1
+  arrayTexto: []
 --- !u!4 &644412154
 Transform:
   m_ObjectHideFlags: 0
@@ -264,3 +268,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 7582d33a0798f694b80b1479e30b95ca, type: 3}
+  rutaIntermedia: /Txt/
+  nombreArchivo: txtPrueba
+  build: 0
+  mostrarDebugLog: 1
+  arrayTexto: []
