@@ -97,7 +97,7 @@ public class GridManager_v2 : MonoBehaviour
             
 
 
-            GameObject newObject = Instantiate(player1, new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f)), Quaternion.identity);  // instatiate the object
+            GameObject newObject = Instantiate(player1, new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f),-0.1f), Quaternion.identity);  // instatiate the object
             newObject.transform.localScale = new Vector3(25, 25, this.transform.localScale.z);
 
 
@@ -110,7 +110,7 @@ public class GridManager_v2 : MonoBehaviour
 
 
 
-            GameObject newObject = Instantiate(player2, new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f)), Quaternion.identity);  // instatiate the object
+            GameObject newObject = Instantiate(player2, new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f), -0.1f), Quaternion.identity);  // instatiate the object
             newObject.transform.localScale = new Vector3(25, 25, this.transform.localScale.z);
 
 
@@ -128,6 +128,12 @@ public class GridManager_v2 : MonoBehaviour
 
             //if (y > 24)
                 s.color = new Color32(67, 82, 61, 255);
+            g.AddComponent<BoxCollider2D>();
+            //g.AddComponent<Rigidbody2D>();
+            //g.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            g.transform.gameObject.tag = "Suelo";
+            //g.AddComponent(typeof(Rigidbody2D));
+
             /*else
                 s.color = new Color32(199, 240, 216, 255);*/
         }
