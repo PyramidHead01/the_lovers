@@ -8,10 +8,14 @@ public class GridManager_v2 : MonoBehaviour
 
     public Sprite sprite;
     public float[,] grid;
+    public GameObject[] players, victorias;
     int vertical, horizontal, columns, rows;
 
-    public GameObject player1, player2;
+    //public List<GameObject> bloquesDerrota = new List<GameObject>();
 
+    public GameObject player1, player2, victoria, derrota;
+
+    VictoriaController victoriaController;
 
     [Header("Rutas")]
     public string rutaIntermedia;
@@ -27,10 +31,10 @@ public class GridManager_v2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        vertical = 24;
-        horizontal = 42;
+        vertical = 24 / 2;
+        horizontal = 42 / 2;
 
-       
+
 
         columns = horizontal * 2;
         rows = vertical * 2;
@@ -84,6 +88,16 @@ public class GridManager_v2 : MonoBehaviour
             }
         }
 
+        victoriaController = GetComponent<VictoriaController>();
+
+        victoriaController.bloqueVictoriaController[0] = victorias[0].GetComponent<BloqueVictoriaController>();
+        victoriaController.bloqueVictoriaController[1] = victorias[1].GetComponent<BloqueVictoriaController>();
+
+        /*foreach(GameObject i in bloquesDerrota)
+        {
+            victoriaController.bloqueDerrotaController[0] = derrota[0].GetComponent<BloqueDerrotaController>();
+        }*/
+
     }
 
     private void SpawnTile(int x, int y, float value)
@@ -91,60 +105,95 @@ public class GridManager_v2 : MonoBehaviour
 
         //Debug.Log(x);
 
-        if (arrayTexto[y].Substring(x, 1) == "C")
+        if (arrayTexto[y].Substring(x, 1) == "1")
         {
             //Aqui instanciar player1
             
 
 
-            GameObject newObject = Instantiate(player1, new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f),-0.1f), Quaternion.identity);  // instatiate the object
-            newObject.transform.localScale = new Vector3(25, 25, this.transform.localScale.z);
+            GameObject newObject = Instantiate(player1, new Vector3(x - (horizontal - 1f), y - (vertical - 1f), -1.5f), Quaternion.identity);  // instatiate the object
+            newObject.transform.localScale = new Vector3(20, 20, this.transform.localScale.z);
 
-
+            players[0] = newObject;
 
         }
-        else if (arrayTexto[y].Substring(x, 1) == "D")
+        else if (arrayTexto[y].Substring(x, 1) == "2")
         {
 
 
 
 
 
-            GameObject newObject = Instantiate(player2, new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f), -0.1f), Quaternion.identity);  // instatiate the object
-            newObject.transform.localScale = new Vector3(25, 25, this.transform.localScale.z);
+            GameObject newObject = Instantiate(player1, new Vector3(x - (horizontal - 1f), y - (vertical - 1f), -1.5f), Quaternion.identity);  // instatiate the object
+            newObject.transform.localScale = new Vector3(20, 20, this.transform.localScale.z);
 
+            players[1] = newObject;
 
             //Aqui instanciar player2
             //Instantiate(player1, new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f)), Quaternion.identity);
         }
 
-        GameObject g = new GameObject("X: " + x + " Y: " + y);
-        g.transform.position = new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f));
-        var s = g.AddComponent<SpriteRenderer>();
-        s.sprite = sprite;
-
-        if (arrayTexto[y].Substring(x, 1) == "B")// || arrayTexto[y].Substring(x, 1) == "C" || arrayTexto[y].Substring(x, 1) == "D")
+        //Bloque victoria
+        else if (arrayTexto[y].Substring(x, 1) == "D")
         {
+            
 
-            //if (y > 24)
-                s.color = new Color32(67, 82, 61, 255);
-            g.AddComponent<BoxCollider2D>();
-            //g.AddComponent<Rigidbody2D>();
-            //g.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            g.transform.gameObject.tag = "Suelo";
-            //g.AddComponent(typeof(Rigidbody2D));
+            GameObject newObject = Instantiate(victoria, new Vector3(x - (horizontal - 1f), y - (vertical - 1f), -1.5f), Quaternion.identity);  // instatiate the object
+            newObject.transform.localScale = new Vector3(20, 20, transform.localScale.z);
 
-            /*else
-                s.color = new Color32(199, 240, 216, 255);*/
+            if(victorias[0] == null)
+            {
+                victorias[0] = newObject;
+            }
+            else
+            {
+                victorias[1] = newObject;
+            }
+
+
+            //var spr = newObject.AddComponent<SpriteRenderer>();
+            //spr.color = new Color32(67, 82, 61, 255);
+
         }
 
+        //Bloque que te mata
+        if (arrayTexto[y].Substring(x, 1) == "C")
+        {
+            GameObject newObject = Instantiate(derrota, new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f)), Quaternion.identity);  // instatiate the object
+            //newObject.transform.localScale = new Vector3(20, 20, transform.localScale.z);
+        }
         else
         {
-            //if (y > 24)
+            GameObject g = new GameObject("X: " + x + " Y: " + y);
+            g.transform.position = new Vector3(x - (horizontal - 0.5f), y - (vertical - 0.5f));
+            //g.transform.localScale = new Vector3(2, 2);
+            var s = g.AddComponent<SpriteRenderer>();
+            s.sprite = sprite;
+
+            if (arrayTexto[y].Substring(x, 1) == "B")// || arrayTexto[y].Substring(x, 1) == "C" || arrayTexto[y].Substring(x, 1) == "D")
+            {
+
+                //if (y > 24)
+                s.color = new Color32(67, 82, 61, 255);
+                g.AddComponent<BoxCollider2D>();
+                //g.AddComponent<Rigidbody2D>();
+                //g.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                g.transform.gameObject.tag = "Suelo";
+                //g.AddComponent(typeof(Rigidbody2D));
+
+                /*else
+                    s.color = new Color32(199, 240, 216, 255);*/
+            }
+
+            else
+            {
+                //if (y > 24)
                 s.color = new Color32(199, 240, 216, 255);
-            /*else
-                s.color = new Color32(67, 82, 61, 255);*/
+                /*else
+                    s.color = new Color32(67, 82, 61, 255);*/
+            }
         }
+
 
 
 
@@ -155,4 +204,5 @@ public class GridManager_v2 : MonoBehaviour
     {
 
     }
+
 }

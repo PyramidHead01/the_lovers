@@ -5,13 +5,17 @@ using UnityEngine;
 public class ColisionesPlayer : MonoBehaviour
 {
 
-    public bool colision = false;
+    public bool colisionSuelo = false, colisionVictoria = false;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Suelo")
         {
-            colision = true;
+            colisionSuelo = true;
+        }
+        if (collision.gameObject.tag == "Victoria")
+        {
+            colisionVictoria = true;
         }
     }
 
@@ -19,7 +23,11 @@ public class ColisionesPlayer : MonoBehaviour
     {
         if (collision.gameObject.tag == "Suelo")
         {
-            colision = false;
+            colisionSuelo = false;
+        }
+        if (collision.gameObject.tag == "Victoria")
+        {
+            colisionVictoria = false;
         }
     }
 

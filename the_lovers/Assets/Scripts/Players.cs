@@ -12,6 +12,29 @@ public class Players : MonoBehaviour
 
     int i = 0;
 
+
+
+    public bool colisionVictoria = false;
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.tag == "Victoria")
+        {
+            colisionVictoria = true;
+            //print(collision.gameObject.transform.name);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.tag == "Victoria")
+        {
+            colisionVictoria = false;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,29 +49,29 @@ public class Players : MonoBehaviour
     {
         if (mov)
         {
-            if (Input.GetKey("d") && !col[0].colision && PlayerPrefs.GetInt("Derecha") == 1)
+            if (Input.GetKey("d") && !col[0].colisionSuelo && PlayerPrefs.GetInt("Derecha") == 1)
             {
                 mov = false;
                 i = 0;
-                transform.position = new Vector3(transform.position.x + 3, transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x + 2f, transform.position.y, transform.position.z);
             }
-            if (Input.GetKey("w") && !col[1].colision && PlayerPrefs.GetInt("Arriba") == 1)
+            if (Input.GetKey("w") && !col[1].colisionSuelo && PlayerPrefs.GetInt("Arriba") == 1)
             {
                 mov = false;
                 i = 1;
-                transform.position = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
+                transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
             }
-            if (Input.GetKey("a") && !col[2].colision && PlayerPrefs.GetInt("Izquierda") == 1)
+            if (Input.GetKey("a") && !col[2].colisionSuelo && PlayerPrefs.GetInt("Izquierda") == 1)
             {
                 mov = false;
                 i = 2;
-                transform.position = new Vector3(transform.position.x - 3, transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z);
             }
-            if (Input.GetKey("s") && !col[3].colision && PlayerPrefs.GetInt("Abajo") == 1)
+            if (Input.GetKey("s") && !col[3].colisionSuelo && PlayerPrefs.GetInt("Abajo") == 1)
             {
                 mov = false;
                 i = 3;
-                transform.position = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z);
+                transform.position = new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z);
             }
         }
 
