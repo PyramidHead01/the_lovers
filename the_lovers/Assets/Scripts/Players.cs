@@ -7,7 +7,7 @@ public class Players : MonoBehaviour
 
     bool mov = true;
     public ColisionesPlayer[] col;
-
+    SoundsHub soundsHub;
     //bool unlockedLeft = true, unlockedRigth = true, unlockedDown = true, unlockedUp = true;
 
     int i = 0;
@@ -15,6 +15,8 @@ public class Players : MonoBehaviour
 
 
     public bool colisionVictoria = false;
+
+    AudioSource audioSourcePlayer;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -42,6 +44,9 @@ public class Players : MonoBehaviour
         PlayerPrefs.SetInt("Arriba", 1);
         PlayerPrefs.SetInt("Izquierda", 1);
         PlayerPrefs.SetInt("Abajo", 1);*/
+        audioSourcePlayer = GameObject.Find("HubSounds").GetComponent<AudioSource>();
+        soundsHub = GameObject.Find("HubSounds").GetComponent<SoundsHub>();
+        //audioSourcePlayer.clip = soundsHub.sonidoAndar;
     }
 
     // Update is called once per frame
@@ -51,24 +56,32 @@ public class Players : MonoBehaviour
         {
             if (Input.GetKey("d") && !col[0].colisionSuelo && PlayerPrefs.GetInt("Derecha") == 1)
             {
+                audioSourcePlayer.clip = soundsHub.sonidoAndar;
+                audioSourcePlayer.Play();
                 mov = false;
                 i = 0;
                 transform.position = new Vector3(transform.position.x + 2f, transform.position.y, transform.position.z);
             }
             if (Input.GetKey("w") && !col[1].colisionSuelo && PlayerPrefs.GetInt("Arriba") == 1)
             {
+                audioSourcePlayer.clip = soundsHub.sonidoAndar;
+                audioSourcePlayer.Play();
                 mov = false;
                 i = 1;
                 transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
             }
             if (Input.GetKey("a") && !col[2].colisionSuelo && PlayerPrefs.GetInt("Izquierda") == 1)
             {
+                audioSourcePlayer.clip = soundsHub.sonidoAndar;
+                audioSourcePlayer.Play();
                 mov = false;
                 i = 2;
                 transform.position = new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z);
             }
             if (Input.GetKey("s") && !col[3].colisionSuelo && PlayerPrefs.GetInt("Abajo") == 1)
             {
+                audioSourcePlayer.clip = soundsHub.sonidoAndar;
+                audioSourcePlayer.Play();
                 mov = false;
                 i = 3;
                 transform.position = new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z);

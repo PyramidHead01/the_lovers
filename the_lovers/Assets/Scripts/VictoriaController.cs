@@ -1,34 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VictoriaController : MonoBehaviour
 {
 
     public BloqueVictoriaController[] bloqueVictoriaController;
-    //public BloqueDerrotaController[] bloqueDerrotaController;
 
-    // Start is called before the first frame update
+    GridManager_v2 gridManager_v2;
+    SoundsHub soundsHub;
+
     void Start()
     {
-        /*GridManager_V2 = GetComponent<GridManager_v2>();
-        bloqueVictoriaController[0] = GridManager_V2.victorias[0].GetComponent<BloqueVictoriaController>();
-        bloqueVictoriaController[1] = GridManager_V2.victorias[1].GetComponent<BloqueVictoriaController>();*/
+        gridManager_v2 = GetComponent<GridManager_v2>();
+        soundsHub = GameObject.Find("HubSounds").GetComponent<SoundsHub>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (bloqueVictoriaController[0].colisionVictoria && bloqueVictoriaController[1].colisionVictoria)
         {
+
             Debug.Log("VICTORIA");
+
+
+            StartCoroutine(gridManager_v2.TransicionGame(1));
+
+            //guarda ruta intermedia y ruta final en un player prefs
+            /*PlayerPrefs.SetString("rutaIntermedia", gridManager_v2.arrayTexto[gridManager_v2.arrayTexto.Count - 1].Substring(gridManager_v2.columns));
+            PlayerPrefs.SetString("nombreArchivo", gridManager_v2.arrayTexto[gridManager_v2.arrayTexto.Count - 2].Substring(gridManager_v2.columns));
+
+            //hace un if donde si es cinematic o game carga un modelo o otro
+            if (gridManager_v2.arrayTexto[gridManager_v2.arrayTexto.Count - 3].Substring(gridManager_v2.columns) == "Cinematics")
+            {
+                SceneManager.LoadScene("Cinematics");
+            }
+            else
+            {
+                SceneManager.LoadScene("Game");
+            }*/
+
+
+
         }
-        /*if (bloqueDerrotaController[0].colisionDerrota && bloqueDerrotaController[1].colisionDerrota)
-        {
-            Debug.Log("DERROTA");
-        }*/
+
     }
-
-
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GridManager_v2 : MonoBehaviour
 {
@@ -9,19 +10,26 @@ public class GridManager_v2 : MonoBehaviour
     public Sprite sprite;
     public float[,] grid;
     public GameObject[] players, victorias;
-    int vertical, horizontal, columns, rows;
+    int vertical, horizontal, rows;// columns, ;
+
+    SoundsHub soundsHub;
+
+    public int columns;
 
     //public List<GameObject> bloquesDerrota = new List<GameObject>();
 
-    public GameObject player1, player2, victoria, derrota;
+    public GameObject player1, player2, victoria, derrota, flecha;
 
     VictoriaController victoriaController;
+    AudioSource audioSourceGrid;
+    //AudioClip sonidoDerrota, sonidoVictoria;
 
     [Header("Rutas")]
     public string rutaIntermedia;
     //\Txt\EscenaPrueba\Dialogo\
     public string nombreArchivo;
     public bool build;
+    bool sonado = false;
 
     [Header("Texto")]
     public bool mostrarDebugLog = true;
@@ -31,10 +39,18 @@ public class GridManager_v2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        /*PlayerPrefs.SetInt("Arriba", 0);
+        PlayerPrefs.SetInt("Izquierda", 0);
+        PlayerPrefs.SetInt("Abajo", 0);*/
+
         vertical = 24 / 2;
         horizontal = 42 / 2;
 
-
+        audioSourceGrid = GameObject.Find("HubSounds").GetComponent<AudioSource>();
+        soundsHub = GameObject.Find("HubSounds").GetComponent<SoundsHub>();
+        //sonidoDerrota = soundsHub.sonidoDerrota;
+        //sonidoVictoria = soundsHub.sonidoVictoria;
 
         columns = horizontal * 2;
         rows = vertical * 2;
@@ -87,6 +103,10 @@ public class GridManager_v2 : MonoBehaviour
                 SpawnTile(i, j, grid[i, j]);
             }
         }
+
+        Debug.Log(arrayTexto[arrayTexto.Count - 1].Substring(columns));
+        Debug.Log(arrayTexto[arrayTexto.Count - 2].Substring(columns));
+        Debug.Log(arrayTexto[arrayTexto.Count - 3].Substring(columns));
 
         victoriaController = GetComponent<VictoriaController>();
 
@@ -156,6 +176,36 @@ public class GridManager_v2 : MonoBehaviour
 
         }
 
+        //Bloques flechas
+        else if (arrayTexto[y].Substring(x, 1) == "E" || arrayTexto[y].Substring(x, 1) == "F" || arrayTexto[y].Substring(x, 1) == "G" || arrayTexto[y].Substring(x, 1) == "H")
+        {
+
+            //Debug.Log("asd");
+
+            GameObject newObject = Instantiate(flecha, new Vector3(x - (horizontal - 1f), y - (vertical - 1f), -1.5f), Quaternion.identity);  // instatiate the object
+            newObject.transform.localScale = new Vector3(20, 20, transform.localScale.z);
+
+            FlechasController fc = newObject.GetComponent<FlechasController>();
+
+            //
+            /*switch (fc.valor)
+            {
+                case 1:
+                    break;
+            }*/
+
+
+            /*switch (arrayTexto[y].Substring(x, 1))
+            {
+                case "E":
+
+                    break;
+            }*/
+
+        }
+
+
+
         //Bloque que te mata
         if (arrayTexto[y].Substring(x, 1) == "C")
         {
@@ -196,6 +246,85 @@ public class GridManager_v2 : MonoBehaviour
 
 
 
+
+    }
+
+
+
+    public IEnumerator TransicionGame(int x)
+    {
+        if(x == 0)
+        {
+            audioSourceGrid.clip = soundsHub.sonidoDerrota;
+            audioSourceGrid.Play();
+            //audioSourceGrid.PlayOneShot(sonidoDerrota);
+        }
+        else
+        {
+
+            audioSourceGrid.clip = soundsHub.sonidoVictoria;
+
+            if (!sonado)
+            {
+                audioSourceGrid.Play();
+                //audioSourceGrid.PlayOneShot(sonidoVictoria);
+            }
+                
+
+            sonado = true;
+
+            //guarda ruta intermedia y ruta final en un player prefs
+            PlayerPrefs.SetString("rutaIntermedia", arrayTexto[arrayTexto.Count - 1].Substring(columns));
+            PlayerPrefs.SetString("nombreArchivo", arrayTexto[arrayTexto.Count - 2].Substring(columns));
+
+        }
+
+        for (int i = 0; i < columns; i++)
+        {
+            for (int j = 0; j < rows; j++)
+            {
+                //SpawnTile(i, j, grid[i, j]);
+
+                GameObject g = new GameObject("X: " + i + " Y: " + j);
+                g.transform.position = new Vector3(i - (horizontal - 0.5f), j - (vertical - 0.5f), -4);
+                var s = g.AddComponent<SpriteRenderer>();
+                s.sprite = sprite;
+
+                s.color = new Color32(67, 82, 61, 255);
+
+                /*if (arrayTexto[j].Substring(i, 1) == "B")
+                {
+                    s.color = new Color32(67, 82, 61, 255);
+                }
+
+                else
+                {
+                    s.color = new Color32(199, 240, 216, 255);
+                }*/
+
+            }
+            yield return null;
+        }
+
+        if (x == 0 || arrayTexto[arrayTexto.Count - 3].Substring(columns) != "Cinematics")
+        {
+            SceneManager.LoadScene("Game");
+        }
+        else
+        {
+
+            SceneManager.LoadScene("Cinematics");
+
+            //hace un if donde si es cinematic o game carga un modelo o otro
+            /*if (arrayTexto[arrayTexto.Count - 3].Substring(columns) == "Cinematics")
+            {
+                SceneManager.LoadScene("Cinematics");
+            }
+            else
+            {
+                SceneManager.LoadScene("Game");
+            }*/
+        }
 
     }
 

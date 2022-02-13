@@ -56,17 +56,18 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BloqueDerrotaController.cs" />
     <Compile Include="Assets\Scripts\GridManager_v2.cs" />
     <Compile Include="Assets\Scripts\GridManager.cs" />
     <Compile Include="Assets\Scripts\VictoriaController.cs" />
-    <Compile Include="Assets\Scripts\FlechasControl.cs" />
+    <Compile Include="Assets\Scripts\BloqueVictoriaController.cs" />
     <Compile Include="Assets\Scripts\Players.cs" />
     <Compile Include="Assets\Scripts\CinematicsController.cs" />
+    <Compile Include="Assets\Scripts\FlechasController.cs" />
     <Compile Include="Assets\Scripts\DerrotaController.cs" />
     <Compile Include="Assets\Scripts\ColisionesPlayer.cs" />
     <Compile Include="Assets\Scripts\CreateLevel.cs" />
-    <Compile Include="Assets\Scripts\BloqueVictoriaController.cs" />
-    <Compile Include="Assets\Scripts\BloqueDerrotaController.cs" />
+    <Compile Include="Assets\Scripts\SoundsHub.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Txt\Cinematicas\CinPrueba2.txt" />
