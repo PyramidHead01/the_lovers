@@ -8,7 +8,7 @@ public class CinematicsController : MonoBehaviour
 
     public Sprite sprite;
     public float[,] grid;
-    int vertical = 24, horizontal = 42, columns = 42 * 2, rows = 24 * 2;
+    int vertical = 48, horizontal = 84, columns = 42 * 2, rows = 24 * 2;
 
     [Header("Rutas")]
     public string rutaIntermedia;
@@ -20,12 +20,15 @@ public class CinematicsController : MonoBehaviour
     public bool mostrarDebugLog = true;
     public List<string> arrayTexto = new List<string>();
 
+    public AudioSource aus;
+
     // Start is called before the first frame update
     void Start()
     {
 
         CrearImagen(nombreArchivo[0]);
         PintarImagen(false);
+        aus = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -41,7 +44,8 @@ public class CinematicsController : MonoBehaviour
         for (int i = 1; i < nombreArchivo.Length; i++)
         {
             CrearImagen(nombreArchivo[i]);
-            yield return new WaitForSeconds(10);
+
+            yield return new WaitForSeconds(4.3f);
 
             //Efecto de transicion
 

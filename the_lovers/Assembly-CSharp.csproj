@@ -70,10 +70,29 @@
     <Compile Include="Assets\Scripts\SoundsHub.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\Borradores\cin8.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\cin6.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\Borradores\cin9.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\Borradores\cin7.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\Borradores\cin3.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\cin7.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\cin4.txt" />
      <None Include="Assets\Txt\Cinematicas\CinPrueba2.txt" />
      <None Include="Assets\Txt\txtPruebav2.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\Borradores\cin6.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\Borradores\cin5.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\Borradores\cin2.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\cinBorrador.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\cin9.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\cin8.txt" />
      <None Include="Assets\Txt\txtPrueba.txt" />
      <None Include="Assets\Txt\Cinematicas\CinPrueba1.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\cin1.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\Borradores\cin4.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\cin3.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\cin5.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\cin2.txt" />
+     <None Include="Assets\Txt\Cinematicas\Cinematica1\Borradores\cin1.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.2.1f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
